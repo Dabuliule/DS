@@ -1,55 +1,58 @@
 #ifndef __TOPSORT_H__
 #define __TOPSORT_H__
 
-#include "AdjListDirGraph.h"			// ÁÚ½Ó¾ØÕóÓĞÏòÍ¼
+#include "AdjListDirGraph.h" // é‚»æ¥çŸ©é˜µæœ‰å‘å›¾
 
 template <class ElemType>
 void StatIndegree(const AdjListDirGraph<ElemType> &g, int *indegree)
-// ²Ù×÷½á¹û£ºÍ³¼ÆÍ¼g¸÷¶¥µãµÄÈë¶È
+// æ“ä½œç»“æœï¼šç»Ÿè®¡å›¾gå„é¡¶ç‚¹çš„å…¥åº¦
 {
-	for (int v = 0; v < g.GetVexNum(); v++)	// ³õÊ¼»¯Èë¶ÈÎª0
+	for (int v = 0; v < g.GetVexNum(); v++) // åˆå§‹åŒ–å…¥åº¦ä¸º0
 		indegree[v] = 0;
 
-	for (int v = 0; v < g.GetVexNum(); v++)// ±éÀúÍ¼µÄ¶¥µã
+	for (int v = 0; v < g.GetVexNum(); v++) // éå†å›¾çš„é¡¶ç‚¹
 		for (int u = g.FirstAdjVex(v); u != -1; u = g.NextAdjVex(v, u))
 			indegree[u]++;
 }
 
 template <class ElemType>
 Status TopSort(const AdjListDirGraph<ElemType> &g)
-// ³õÊ¼Ìõ¼ş£º´æÔÚÓĞÏòÍ¼g
-// ²Ù×÷½á¹û£ºÈçgÎŞ»ØÂ·,ÔòÊä³ögµÄ¶¥µãµÄÒ»¸öÍØÆËĞòÁĞ,²¢·µ»ØSUCCESS,·ñÔò·µ»ØFAIL
+// åˆå§‹æ¡ä»¶ï¼šå­˜åœ¨æœ‰å‘å›¾g
+// æ“ä½œç»“æœï¼šå¦‚gæ— å›è·¯,åˆ™è¾“å‡ºgçš„é¡¶ç‚¹çš„ä¸€ä¸ªæ‹“æ‰‘åºåˆ—,å¹¶è¿”å›SUCCESS,å¦åˆ™è¿”å›FAIL
 {
-	int *indegree = new int[g.GetVexNum()];	// ¶¥µãÈë¶ÈÊı×é		
+	int *indegree = new int[g.GetVexNum()]; // é¡¶ç‚¹å…¥åº¦æ•°ç»„
 	int v, u, count = 0, top = -1;
 	ElemType e;
-	StatIndegree(g, indegree);				// Í³¼Æ¶¥µãµÄÈë¶È
-	
+	StatIndegree(g, indegree); // ç»Ÿè®¡é¡¶ç‚¹çš„å…¥åº¦
 
 	for (v = 0; v < g.GetVexNum(); v++)
-		if (indegree[v] == 0)  {            // Èë¶ÈÎª0µÄ¶¥µãÈëÕ» 
+		if (indegree[v] == 0)
+		{ // å…¥åº¦ä¸º0çš„é¡¶ç‚¹å…¥æ ˆ
 			indegree[v] = top;
-            top = v;
-        }
+			top = v;
+		}
 
-	while (top != -1)	{	// Õ»·Ç¿Õ
+	while (top != -1)
+	{ // æ ˆéç©º
 		v = top;
-        top = indegree[v];
+		top = indegree[v];
 		g.GetElem(v, e);
 		cout << e << "  ";
-		count++;			// ¶ÔÊä³ö¶¥µã½øĞĞ¼ÇÊı
+		count++; // å¯¹è¾“å‡ºé¡¶ç‚¹è¿›è¡Œè®°æ•°
 		for (u = g.FirstAdjVex(v); u != -1; u = g.NextAdjVex(v, u))
-			// ¶ÔvµÄÃ¿¸öÁÚ½ÓµãuÈë¶È¼õ1
-			if (--indegree[u] == 0)	{// uÈë¶ÈÎª0,½«uÈëÕ»
-			   indegree[u] = top;
-               top = u;
-            }
+			// å¯¹vçš„æ¯ä¸ªé‚»æ¥ç‚¹uå…¥åº¦å‡1
+			if (--indegree[u] == 0)
+			{ // uå…¥åº¦ä¸º0,å°†uå…¥æ ˆ
+				indegree[u] = top;
+				top = u;
+			}
 	}
-	delete []indegree;						// ÊÍ·ÅindegreeËùÕ¼ÓÃµÄ´æ´¢¿Õ¼ä
+	delete[] indegree; // é‡Šæ”¾indegreeæ‰€å ç”¨çš„å­˜å‚¨ç©ºé—´
 
-	if (count < g.GetVexNum()) return FAIL;	// Í¼gÓĞ»ØÂ·
-	else return SUCCESS;					// ÍØÆËÅÅĞò³É¹¦
+	if (count < g.GetVexNum())
+		return FAIL; // å›¾gæœ‰å›è·¯
+	else
+		return SUCCESS; // æ‹“æ‰‘æ’åºæˆåŠŸ
 }
 
 #endif
-

@@ -1,8 +1,8 @@
-#include "TopSort.h"					// ÍØÆËÅÅĞòËã·¨
+#include "TopSort.h"					// æ‹“æ‰‘æ’åºç®—æ³•
 
 int main(void)
 {
-    try									// ÓÃtry·â×°¿ÉÄÜ³öÏÖÒì³£µÄ´úÂë
+    try									// ç”¨tryå°è£…å¯èƒ½å‡ºç°å¼‚å¸¸çš„ä»£ç 
 	{
 		char vexs[] = {'A', 'B', 'C', 'D', 'E', 'F'};
 		int m[6][6] = {
@@ -18,34 +18,34 @@ int main(void)
 		AdjListDirGraph<char> g(vexs, n);
 
 		for (int u = 0; u < n; u++)
-		{	// Éú³ÉÁÚ½Ó¾ØÕóµÄĞĞ
+		{	// ç”Ÿæˆé‚»æ¥çŸ©é˜µçš„è¡Œ
 			for (int v = 0; v < n; v++)
-			{	// Éú³ÉÁÚ½Ó¾ØÕóÔªËØµÄÖµ
+			{	// ç”Ÿæˆé‚»æ¥çŸ©é˜µå…ƒç´ çš„å€¼
 				if (m[u][v] == 1) g.InsertArc(u, v);
 			}
 		}
 
-		cout << "Ô­Í¼:" << endl;
-		g.Display();						// ÏÔÊ¾Í¼g
+		cout << "åŸå›¾:" << endl;
+		g.Display();						// æ˜¾ç¤ºå›¾g
 		cout << endl;
-		system("PAUSE");				// µ÷ÓÃ¿âº¯Êısystem()
+		system("PAUSE");				// è°ƒç”¨åº“å‡½æ•°system()
 
-		cout << "ÍØÆËÅÅĞò:";
+		cout << "æ‹“æ‰‘æ’åº:";
 		if (TopSort(g) == SUCCESS)
-		{	// ÍØÆËÅÅĞò³É¹¦
-			cout << endl << "Ô­Í¼ÎŞ»·!" << endl;
+		{	// æ‹“æ‰‘æ’åºæˆåŠŸ
+			cout << endl << "åŸå›¾æ— ç¯!" << endl;
 		}
 		else
-		{	// ÍØÆËÅÅĞòÊ§°Ü
-			cout << endl << "Ô­Í¼´æÔÚ»·!" << endl;
+		{	// æ‹“æ‰‘æ’åºå¤±è´¥
+			cout << endl << "åŸå›¾å­˜åœ¨ç¯!" << endl;
 		}
 	}
-	catch (Error err)					// ²¶×½²¢´¦ÀíÒì³£
+	catch (Error err)					// æ•æ‰å¹¶å¤„ç†å¼‚å¸¸
 	{
-		err.Show();						// ÏÔÊ¾Òì³£ĞÅÏ¢
+		err.Show();						// æ˜¾ç¤ºå¼‚å¸¸ä¿¡æ¯
 	}
 
-	system("PAUSE");					// µ÷ÓÃ¿âº¯Êısystem()
-	return 0;							// ·µ»ØÖµ0, ·µ»Ø²Ù×÷ÏµÍ³
+	system("PAUSE");					// è°ƒç”¨åº“å‡½æ•°system()
+	return 0;							// è¿”å›å€¼0, è¿”å›æ“ä½œç³»ç»Ÿ
 }
 
