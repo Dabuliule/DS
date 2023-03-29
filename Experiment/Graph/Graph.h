@@ -20,7 +20,7 @@ private:
     void Clear();
     bool IsPathDFS(int v1, int v2, vector<bool> &visited);
     bool IsPathBFS(int v1, int v2, vector<bool> &visited);
-    void GetMaxPathLenth(int start, int cnt, int &len, vector<bool> &visited);
+    void GetMaxPathLenth(int start, int count, int &len, vector<bool> &visited);
     void IsTreeDFS(int v, int &count, vector<bool> &visited);
     bool TopSortDFS(int v, vector<int> &topsort, vector<int> &flag);
     bool TopSort(vector<int> &topsort);
